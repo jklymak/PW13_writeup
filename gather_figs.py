@@ -8,4 +8,12 @@ with open('PW13Paper.log') as fin:
         name = re.search(searchst,l)
         if name:
             print(name.group(1))
-            shutil.copy(name.group(1), './figs')
+            try:
+                shutil.copy(name.group(1), './figs')
+            except:
+                pass
+
+try:
+    shutil.copy('/Users/jklymak/texmf/bibtex/bib/main.bib', './main.bib')
+except:
+    pass
