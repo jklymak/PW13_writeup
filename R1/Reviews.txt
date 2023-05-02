@@ -1,0 +1,75 @@
+Reviewer #1 Evaluations:
+Recommendation (Required): Return to author for minor revisions
+Significant: Yes, the paper is a significant contribution and worthy of prompt publication.
+Supported: Yes
+Referencing: Mostly yes, but some additions are necessary.
+Quality: Yes, it is well-written, logically organized, and the figures and tables are appropriate.
+Data: Yes
+Accurate Key Points: Yes
+
+Reviewer #1 (Formal Review for Authors (shown to authors)):
+
+Review of "Impact of Synoptic Wind Intensification and Relaxation on the Dynamics and Heat Budget of the South Senegalese Upwelling Sector," by Klymak et al.
+
+The authors present a detailed analysis of some very high spatial resolution surveys of the shelf region off southern Vancouver Island. It is gratifying to see this nice analysis of this data set. The analysis focuses on how shelf circulation and water masses are related to an important mesoscale circulation feature in this region, namely the Juan de Fuca Eddy (EDDY). The authors present new data and explore mechanisms associated with mixing between shelf waters and the EDDY, document the sharpness of the front between the EDDY and offshore shelf waters, and describe how upstream shelf water separates from the shelf before reaching, and influencing, the EDDY. Lastly, they provide good evidence that low oxygen levels in the EDDY are likely due to in situ respiration rather than advection of low-oxygen, deep undercurrent water into the eddy as previously suggested. While I have some suggestions for improving the manuscript and its clarity, I recommend that this paper be published in the Journal of Geophysical Research after minor revision.
+
+Suggestions to improve the manuscript:
+
+The idea that the equatorward shelf current "separation is a very strong cross-shelf exchange event, and transports substantial nutrient-rich coastal water offshore to drive productivity in the deeper ocean" is like documented elsewhere in the California Current, for example as summarized by Strub et al. (1991). Maybe refer to that study?
+
+Lines 202-210: Water masses along 26.4 not clear in Fig 5; what are we supposed to see in the "# of data points per bin" color map? I think you are highlighting the low # of data points (more purple) between spiciness anomaly ~0.02-0.1 in between the populous offshore water (spiciness ~0.2) and EDDY water (spiciness 0). Maybe draw a label and arrow to this in between region?
+
+Line 211 and on: I don't see synthetic across-shelf lines in Fig 1b, but I do see them in Fig 8; need to describe the projection method to make the synthetic sections somewhere in the paper
+
+Lines 260-272: can we see blobs of high spice as described in Fig 10 in the along-canyon transects of Fig 9, say at X=27 km in the 8/24 section? Might be nice to point these out.
+
+3.3 Separation of coastal waters: I know that ADCP data are not available, but how about computing geostrophic velocities from the density data?
+
+Fig 12 and discussion: I'm not sure the 25.5 sigma-t maps help much. The ~0 spiciness anomaly EDDY water is not apparent inshore; the inshore water is actually spicier than the tongue water, likely because this density surface is being influenced by shallow mixed layer processes.
+
+\end{point}
+
+\begin{point}
+Line 357-359: this conjecture about the source of the shelf waters offshore of the EDDY isn't supported by the evidence. It likely is just deeper upwelled water, southward of where the tongue separates. So upwelling drives it, not compensation for offshore flux of tongue water.
+\end{point}
+
+\begin{point}
+Section 4.1, lines 385-397: so the inferred oxygen consumption rate is less than the estimated rates based on other continental shelf studies. [Aside: see Connolly et al., 2010, for oxygen consumption rates on a nearby shelf rather than from the Gulf of Mexico.] So that implies that physical processes are keeping the oxygen in the EDDY higher than would be expected from biological decay and oxygen consumption. The authors remark on this by suggesting that the residence time of the water is shorter than their estimate of the whole season. Another way to say this, and as done in Adams et al. (2013), the physics (advection, mixing) contributes about half to the measured DO change. Adams et al. (2013) found about 57-68% was due to physics. I suggest the authors connect the dramatic over-bank hydraulic jump and mixing mechanism they document as another physical process that can contribute to maintaining oxygen levels in the EDDY.
+\end{point}
+
+\begin{point}
+Section 4.1, lines 398-414: This is a useful argument, but it could made clearer. First, I don't see where the estimate of kappa_rho = 10 m^2/s is reported in the results section. Second, what is meant by "found in 10^-4 of the water column?" Perhaps state a percentage instead. Lastly, the conclusion is that the vigorous mixing contributes to the homogenization of the EDDY water onto a mixing line, rather than the alternative long residence time (with weaker mixing). This is consistent with the paragraph above based on oxygen, so maybe useful to mention this corroboration.
+\end{point}
+
+\begin{point}
+Section 4.1, lines 420-426: so what shall we conclude? Likely that model is too viscous, related to the coarse horizontal resolution of 3 km. This is high spatial resolution, but evidently not enough.
+\end{point}
+
+
+Minor/editorial comments:
+a. Abstract: use of "recirculation" is odd. Recirculating with respect to what? Why not just use the term "eddy?"
+b. Figure 1: draw notional Juan de Fuca Eddy on here like for Vancouver Island Coastal Current and the coastal upwelling current
+c. Line 234: 48.5N, not 44.5N
+d. Fig 12: label Barclay Canyon
+e. References: many uncapitalized place names (e.g., U.S. states)
+
+\subsection*{}
+Reviewed by Jack Barth, Oregon State University
+
+References:
+Adams, K. A., J. A. Barth, and F. Chan (2013), Temporal variability of near-bottom dissolved oxygen during upwelling off central Oregon, J. Geophys. Res. Oceans, 118, doi:10.1002/jgrc.20361.
+Connolly, T. P., B. M. Hickey, S. L. Geier, and W. P. Cochlan (2010), Processes influencing seasonal hypoxia in the northern California Current System, J. Geophys. Res., 115, C03021, doi:10.1029/2009JC005283.
+Strub, P.T., Kosro, P.M., Huyer, A., and CTZ Collaborators. (1991) The nature of the cold filaments in the California Current System. Journal of Geophysical Research, 96, 14743-14768.
+
+\
+Reviewer #2 Evaluations:
+Recommendation (Required): Return to author for minor revisions
+Significant: The paper has some unclear or incomplete reasoning but will likely be a significant contribution with revision and clarification.
+Supported: Yes
+Referencing: Yes
+Quality: The organization of the manuscript and presentation of the data and results need some improvement.
+Data: Yes
+Accurate Key Points: Yes
+
+Reviewer #2 (Formal Review for Authors (shown to authors)):
+

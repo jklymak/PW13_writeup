@@ -1,0 +1,602 @@
+% LaTeX rebuttal letter example.
+%
+% Copyright 2019 Friedemann Zenke, zenkelab.org
+%
+% Based on examples by Dirk Eddelbuettel, Fran and others from
+% https://tex.stackexchange.com/questions/2317/latex-style-or-macro-for-detailed-response-to-referee-report
+%
+% Licensed under cc by-sa 3.0 with attribution required.
+
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum} % to generate some filler text
+\usepackage{fullpage}
+\usepackage{listings}
+
+% import Eq and Section references from the main manuscript where needed
+% \usepackage{xr}
+% \externaldocument{manuscript}
+
+% package needed for optional arguments
+\usepackage{xifthen}
+% define counters for reviewers and their points
+\newcounter{reviewer}
+\setcounter{reviewer}{0}
+\newcounter{point}[reviewer]
+\setcounter{point}{0}
+
+% This refines the format of how the reviewer/point reference will appear.
+\renewcommand{\thepoint}{P\,\thereviewer.\arabic{point}}
+
+% command declarations for reviewer points and our responses
+\newcommand{\reviewersection}{\stepcounter{reviewer} \bigskip \hrule
+                  \section*{Reviewer \thereviewer}}
+
+\newenvironment{point}
+   {\refstepcounter{point} \bigskip \noindent {\textbf{Reviewer~Point~\thepoint} } ---\ }
+   {\par }
+
+\newcommand{\shortpoint}[1]{\refstepcounter{point}  \bigskip \noindent
+	{\textbf{Reviewer~Point~\thepoint} } ---~#1\par }
+
+\newenvironment{reply}
+   {\medskip \noindent \begin{sf}\textbf{Reply}:\  }
+   {\medskip \end{sf}}
+
+\newcommand{\shortreply}[2][]{\medskip \noindent \begin{sf}\textbf{Reply}:\  #2
+	\ifthenelse{\equal{#1}{}}{}{ \hfill \footnotesize (#1)}%
+	\medskip \end{sf}}
+
+\newenvironment{changes}[1]
+{\texttt{#1}}
+{\par}
+
+\lstloadlanguages{TeX}
+
+\title{Response to reviewers: Separation of an upwelling current bounding the Juan de Fuca Eddy}
+\author{Jody Klymak, Susan Allen, and Stephanie Waterman}
+
+\begin{document}
+
+\lstset{language=TeX}
+
+\maketitle
+
+\section*{}
+% General intro text goes here
+Thank you to both reviewers and the Editor for their time and effort into this paper.  It is appreciated that this is a complicated story in this paper, and the reviewers' persistence in making sense of it with us have been very helpful in adding both better insights and (hopefully) better explanations.
+
+% Let's start point-by-point with Reviewer 1
+\reviewersection
+
+% Point one description
+\subsection*{Reviewer summary}
+The authors present a detailed analysis of some very high spatial resolution surveys of the shelf region off southern Vancouver Island. It is gratifying to see this nice analysis of this data set. The analysis focuses on how shelf circulation and water masses are related to an important mesoscale circulation feature in this region, namely the Juan de Fuca Eddy (EDDY). The authors present new data and explore mechanisms associated with mixing between shelf waters and the EDDY, document the sharpness of the front between the EDDY and offshore shelf waters, and describe how upstream shelf water separates from the shelf before reaching, and influencing, the EDDY. Lastly, they provide good evidence that low oxygen levels in the EDDY are likely due to in situ respiration rather than advection of low-oxygen, deep undercurrent water into the eddy as previously suggested. While I have some suggestions for improving the manuscript and its clarity, I recommend that this paper be published in the Journal of Geophysical Research after minor revision.
+
+\begin{reply}
+    Thank you for your comments
+\end{reply}
+
+\subsection*{Suggestions to improve the manuscript}
+
+\begin{point}
+    The idea that the equatorward shelf current "separation is a very strong cross-shelf exchange event, and transports substantial nutrient-rich coastal water offshore to drive productivity in the deeper ocean" is like documented elsewhere in the California Current, for example as summarized by Strub et al. (1991). Maybe refer to that study?
+\end{point}
+
+\begin{reply}
+    That reference is super helpful; the lead author is embarrassed to say that he had it in his bibliography, but failed to re-consider it when writing the paper.  Not only should we have cited it, but it summarizes a lot of the previous work off California, and it lays out the likely mechanisms of the separation we saw.  The fourth paragraph of the introduction has been revised to include this reference.
+
+    \begin{lstlisting}[language=TeX, basicstyle=\small]
+        A second goal of our study was to better understand cross-shore exchange
+        between shelf and offshore water.  For a two-dimensional topography with
+        wind forcing, cross-shore transport is supplied by Ekman layers. However,
+        in many locations there is also evidence of eddies, meanders and filaments
+        driving wholesale separation of shelf currents into the deep ocean. These
+        have been well-studied off California \cite{strubetal91} where satellite
+        and \emph{in-situ} observations show large meanders of coastal upwelling
+        currents leading to coastal water injected into the offshore domain.
+        Along the...
+    \end{lstlisting}
+
+    Further, in the discussion we have added reference to this paper again.
+
+    \begin{lstlisting}[language=TeX, basicstyle=\small]
+        In California, most of the cold filaments observed appear to be
+        catalyzed by headlands and underwater topography \cite{strubetal91},
+        though modelling studies find instabilities are possible even in
+        two-dimensional flows \cite{pierceetal91}.
+    \end{lstlisting}
+
+\end{reply}
+
+\begin{point}
+    Lines 202-210: Water masses along 26.4 not clear in Fig 5; what are we supposed to see in the "\# of data points per bin" color map? I think you are highlighting the low \# of data points (more purple) between spiciness anomaly ~0.02-0.1 in between the populous offshore water (spiciness ~0.2) and EDDY water (spiciness 0). Maybe draw a label and arrow to this in between region?
+\end{point}
+
+\begin{reply}
+    Yes, there are three relatively distinct water masses along 26.4 - note the logarithmic color mapping.  To (hopefully) make this more clear we added a second panel to Figure 5 that shows the PDF along 26.4, and labeled the peaks.  Hopefully this helps clarify these water masses (in addition to the maps show in Figures 6 and 8).
+\end{reply}
+
+\begin{point}
+    Line 211 and on: I don't see synthetic across-shelf lines in Fig 1b, but I do see them in Fig 8; need to describe the projection method to make the synthetic sections somewhere in the paper
+\end{point}
+
+\begin{reply}
+    Ooops - Figure 1 lost its synthetic sections at some point.  They have been re-added in figure 1a (1b was getting quite crowded).
+
+    The naive projection used is described now in the Site and Methods:
+
+    \begin{lstlisting}[language=TeX, basicstyle=\small]
+    We use an along/across-shelf co-ordinate system with an origin at
+    48.4\textdegree N and 125.6\textdegree W, with the across-shelf $x$
+    oriented 39 degrees north of East (\fref{fig:LocMapBoth}b, grey/white
+    alternating lines).  The projection is Cartesian with a central latitude at
+    48.4\textdegree N, which is fine for the limited geographic extents
+    discussed here.
+    \end{lstlisting}
+
+\end{reply}
+
+\begin{point}
+    Lines 260-272: can we see blobs of high spice as described in Fig 10 in the along-canyon transects of Fig 9, say at X=27 km in the 8/24 section? Might be nice to point these out.
+\end{point}
+
+\begin{reply}
+  Fig 10 is at 15 km in Fig 9, so we think the overflow feeds the continuum at this point in the canyon.  However, it is interesting to consider how blobs are getting as far up the canyon as 27 km.
+\end{reply}
+
+
+
+\begin{point}
+    3.3 Separation of coastal waters: I know that ADCP data are not available, but how about computing geostrophic velocities from the density data?
+\end{point}
+
+\begin{reply}
+    The geostrophic shear indicates equatorward flow, as evidenced by the onshore upwards tilt of the isopycnals.  Absolute velocities are of course hard to infer.
+
+    However, more to the point, inferring relatively subtle offshore velocities using along-isobath density gradients is challenging.   For a geostrophically balanced anti-cyclonic circulation, we would expect a sea-surface low at the pivot point between the offshore moving water, and the onshore moving water.  That would lead to a local high in the isopycnal heights. Considering Fig.\ 12, which has this information, we think its pretty hard to see that occurring against the larger-scale backdrop of the isopycnals sloping up onto the shelf, and with the complication of internal tide heaving, which is considerable at this location.  Similarly considering Fig 6, it would be hard to say the 26.4 isopycnal is much shallower at 28 km than 42 km.  "Along isobath" also is pretty hard to define in this location.  Frankly its not even clear how much ADCP data we would have needed to collect to capture this feature adequately.
+\end{reply}
+
+\begin{point}
+    Fig 12 and discussion: I'm not sure the 25.5 sigma-t maps help much. The ~0 spiciness anomaly EDDY water is not apparent inshore; the inshore water is actually spicier than the tongue water, likely because this density surface is being influenced by shallow mixed layer processes.
+\end{point}
+
+\begin{reply}
+    We agree with your interpretation that this layer is being influenced by the surface mixed layer.  The layer was included for completeness.
+
+    In response to this comment, we have changed the isopycnal to a deeper one (25.8) which is in the "minty" water.  We think it shows the three-dimensionality pretty well.
+
+    Note there was a rounding error in the labelling of the bottom row - this isopycnal was 26.55, not 26.6 as indicated in the title and text.
+
+    Finally we decided to add all the data, rather than a subset to this plot.  There were some subsequent surveys excluded from the first that help solidify the case that the tongue is there.
+\end{reply}
+
+
+
+\begin{point}
+    Line 357-359: this conjecture about the source of the shelf waters offshore of the EDDY isn't supported by the evidence. It likely is just deeper upwelled water, southward of where the tongue separates. So upwelling drives it, not compensation for offshore flux of tongue water.
+\end{point}
+
+\begin{reply}
+    Agreed that there is upwelling, and the upwelling tends to push water up the shelf.  However, its not clear why that would be stronger here than further upstream (poleward) where the water has had time to partially mix.  Further, simple upwelling ageostrophically brings water up at the bottom, whereas this is happening mid-depth.  If anything, you'd expect the secondary circulation associated with upwelling to push mid-depth water offshore?
+\end{reply}
+
+\begin{point}
+    Section 4.1, lines 385-397: so the inferred oxygen consumption rate is less than the estimated rates based on other continental shelf studies. [Aside: see Connolly et al., 2010, for oxygen consumption rates on a nearby shelf rather than from the Gulf of Mexico.] So that implies that physical processes are keeping the oxygen in the EDDY higher than would be expected from biological decay and oxygen consumption. The authors remark on this by suggesting that the residence time of the water is shorter than their estimate of the whole season. Another way to say this, and as done in Adams et al. (2013), the physics (advection, mixing) contributes about half to the measured DO change. Adams et al. (2013) found about 57-68\% was due to physics. I suggest the authors connect the dramatic over-bank hydraulic jump and mixing mechanism they document as another physical process that can contribute to maintaining oxygen levels in the EDDY.
+\end{point}
+
+\begin{reply}
+    Thanks a lot for these references - they are very helpful.  We reference Connolly et al when we quote the consumption rate (it was surprisingly hard to find references on this).  We have modified the end of this section to say the following, which we think is in the spirit of your suggestion:
+
+    \begin{lstlisting}[language=TeX, basicstyle=\small]
+        This is consistent with findings on the Oregon shelf where physical
+        processes are thought to account for 55-70\% of changes in dissolved
+        oxygen concentrations \cite{adamsetal13}.  Definitively identifying the
+        exchange mechanisms into the \Eddy\ is challenging from this data set.
+        The offshore front does not appear to have much exchange, however as
+        noted above there does appear to be strong tidal flows and mixing over
+        the submarine banks that can transport more oxygenated water into the
+        \Eddy.  Further, the Vancouver Island coastal current is oxygen rich,
+        and has a much less sharp front than the offshore front
+        (\fref{fig:Frontsurvey}).
+    \end{lstlisting}
+
+\end{reply}
+
+\begin{point}
+    Section 4.1, lines 398-414: This is a useful argument,
+    but it could made clearer. First, I don't see where the estimate of $\kappa_\rho = 10\ m^2/s$ is reported in the
+    results section. Second, what is meant by "found in $10^{-4}$ of the water column?" Perhaps state a percentage instead. Lastly, the conclusion is that the vigorous mixing contributes to the homogenization of the EDDY water onto a mixing line, rather than the alternative long residence time (with weaker mixing). This is consistent with the paragraph above based on oxygen, so maybe useful to mention this corroboration.
+\end{point}
+
+\begin{reply}
+    Ooops sorry - we decided to be more conservative in the results section, but left the inconsistency here.  In both sections we've changed the numbers to reflect a relatively broad range $0.5-5 \mathrm{m^2\,s^{-1}}$, given the looseness of any of these estimates, and we changed the fractions to percentages.
+\end{reply}
+
+\begin{point}
+    Section 4.1, lines 420-426: so what shall we conclude? Likely that model is too viscous, related to the coarse horizontal resolution of 3 km. This is high spatial resolution, but evidently not enough.
+\end{point}
+
+\begin{reply}
+Fair enough.  Added a concluding sentence:
+
+\begin{lstlisting}
+    Overall it seems that the model sees stronger cross-shelf advection than are
+    apparent in these observations, though the reason for this will require
+    further study.
+\end{lstlisting}
+
+Its hard to say more, but we suspect that the model has a stronger mesoscale eddy field than observed, and these generate substantial cross-shore motions.  It would be a great project to try and test why the regional simulation is so much more advective, but beyond our scope here.
+\end{reply}
+
+\subsection*{Minor/editorial comments:}
+
+\begin{point}
+Abstract: use of "recirculation" is odd. Recirculating with respect to what? Why not just use the term "eddy?"
+\end{point}
+
+\begin{reply}
+    This was just to differentiate the dynamics a bit, but we don't feel strongly about it.  A stagnant region between two currents is eddy-like, but the analogy with a freely propagating eddy seems strained.  Regardless, we use recirculation once now in the abstract, and then drop it for "eddy" since that is how this feature is referred to in previous literature.
+\end{reply}
+
+\shortpoint{Figure 1: draw notional Juan de Fuca Eddy on here like for Vancouver Island Coastal Current and the coastal upwelling current}
+\shortreply[]{Figure 1 has been modified accordingly.}
+
+\shortpoint{Line 234: 48.5N, not 44.5N}
+\shortreply[]{Thanks}
+
+
+\shortpoint{Fig 12: label Barclay Canyon}
+\shortreply[]{We tried this, but its pretty hard to do without obscuring data. Barkley is labelled in Figure 1.  }
+
+\shortpoint{References: many uncapitalized place names (e.g., U.S. states)}
+\shortreply[]{Thanks}
+
+\begin{reply}
+    Thank you again for your help with the manuscript.
+\end{reply}
+
+
+\reviewersection
+
+\begin{point}
+Overall, this is a very compact manuscript that documents the structure of an upwelling current and coastal jet that comprise the bounding arms of the Juan de Fuca Eddy, and contrasts T/S and oxygen characteristics inside and outside of the feature to infer the origin of eddy interior water. The authors have a really cool combination of datasets that they have wrung out to explore the eddy feature from multiple angles, but the introduction to these datasets and features is a bit too compact for readers who may not be familiar with the region, its geography, and major features. The text and figures were at times difficult to follow, and some suggestions are given below for mostly minor revisions that would may improve the clarity of the manuscript, interpretation of its figures, and overall readability.
+\end{point}
+
+\begin{point}
+    I spent a LOT of time trying to translate the descriptions of the data sets and key geographic features to the multiple cruises, cross-sections, and coordinate systems. It was very difficult to compare the different lines and coordinate axes to each other, and the text switched between primary references to lat/lon, cruise lines, position relative to cross-shore coordinate axes, and geographic features. Figure 1b attempted to put all of the La Perouse, Falkor, and MVP casts together with the primary cross-shore coordinate system used in several plots, but several of the layers got lost, so it was difficult to distinguish them from each other. Perhaps rearranging the layering so that the MVP lines are at the bottom, and the coordinate system on top would be sufficient, and perhaps moving (or repeating) the coordinate system to Figure 2a would make the plot more readable. Is the buoy plotted here too? I'm not very familiar with the area, and often had to flip among multiple figures to follow the descriptions of the features in the text. If the location of a key feature like a canyon or a bank is essential to understanding the description of a feature, it would be helpful to make sure it is easy to find in Figure 1 and/or the figure being described (for example, text describing Figure 8).
+\end{point}
+
+\begin{reply}
+Indeed, keeping this all straight is challenging, and thanks for your suggestions.  Figure 1 now has three panels, and we changed the layering.  This is probably worth the extra space, and we hope that it helps with legibility.  Added the La Perouse Buoy to Fig 1c.  Hopefully this helps, though with such a complicated study region it will remain challenging.
+\end{reply}
+
+
+\begin{point}
+
+    The text is largely well-written, but some mostly stylistic choices make sentences difficult to parse. Avoid the construction of starting sentences with "This", as it leads to loss of specificity. For example, 78-83, in which "This" could refer to the inference, the assumption, the OMZ, etc. Or 250: "this" could mean ageostrophy or movement. Other examples where the wording is unclear are given in the comments and questions below.
+\end{point}
+
+\begin{reply}
+    Thanks cleaned this up in both these spots, and a few other places.  Agree that using "this" at the beginning of a sentence should be clear and unambiguous.  On the other hand, repeating a phrase from the previous sentence (or worse rephrasing it) is harder to parse.
+\end{reply}
+
+\begin{point}
+
+    Editing suggestions: Consistent capitalization of EDDY, Canyon, Figure, Bank, etc. Revision can also correct several common grammar errors (farther vs further, that vs which).
+\end{point}
+
+\begin{reply}
+    Thanks for the careful read of this.  We think we have made the location
+    names consistent now.  Note that only "Eddy" gets capitalized by itself;
+    for the banks and canyons, we capitalized if it was the full name, and left
+    lower case if referring to "the canyon".
+
+    As to the grammar points, we are not grammar experts, but wonder if the
+    further/farther distinction is an Americanism.  Our five minutes of
+    googling this subject indicates that both are in common usage to describe
+    distances.  (The lead author will admit thinking he was illiterate between moves from Canada, to the US, and back again in his spelling of ``modeling/modelling'')
+\end{reply}
+
+\begin{point}
+    Smaller notes:
+    23-27: some grammar+clarity issues
+\end{point}
+
+\begin{reply}
+    Thanks changed to:
+    \begin{lstlisting}
+        There is a less than 1-km wide temperature-salinity front on the
+        offshore side of this well-mixed water that has no sign of
+        instabilities. The clearest evidence of cross-front transport is found
+        during a tidally resolved survey over a bank. The transport is due to
+        flows in the cross-bank direction that also drive 50-m tall hydraulic
+        jumps.
+    \end{lstlisting}
+\end{reply}
+
+\shortpoint{61: if I understand the intent of this sentence, no comma between
+    site, that}
+
+\shortreply[]{Fixed}
+
+\shortpoint{ 63: equatorward, right?}
+
+\shortreply[]{ooops, yes - mistakes like that won't make it easier for readers to get oriented.  }
+
+\begin{point}
+    79: is the oxygen conservative, or do you mean the process that upwells it preserves its signature?
+\end{point}
+
+\begin{reply}
+   The assumption in the previous work was that oxygen is a conservative tracer.
+\end{reply}
+
+
+\begin{point}
+    102-107: very long sentence
+\end{point}
+
+\begin{reply}
+    Indeed - split.  The second sentence is still rather long, but is a list, so should be easy enough to parse, but agree that two introductory clauses and a list was very hard to read.
+\end{reply}
+
+
+\begin{point}
+    116: which not that
+\end{point}
+
+\begin{reply}
+    Went the other way and removed the comma.
+\end{reply}
+
+\begin{point}
+    126-127: error bars for oxygen post Winklers/calibration?
+\end{point}
+
+\begin{reply}
+    TODO: get Whitney reference.
+\end{reply}
+
+\begin{point}
+    138-140: a real shame, as is the lack of the ADCP! The sentence about the ADCP can likely be combined with paragraph above.
+\end{point}
+
+
+
+\begin{point}
+    153-154: which features? We haven't described them yet.
+\end{point}
+
+\begin{reply}
+    Rephrased to:
+
+    \begin{lstlisting}
+        Hydrographic sections along the LB and LC hydrographic lines highlight
+        summer conditions on the Southern Vancouver Island Shelf and presented
+        to give context to the more detailed survey carried out on the
+        \emph{R/V Falkor}
+    \end{lstlisting}
+
+\end{reply}
+
+\begin{point}
+    154: drawdown? What do you mean here?
+\end{point}
+
+\begin{reply}
+    rephrased to
+
+    \begin{lstlisting}
+        The water upstream of the \Eddy\ region, along the LC line, is less
+        mixed than the \Eddy\ water (\fref{fig:LaPerouse2013Ctd}, top three
+        rows) and has higher oxygen.
+    \end{lstlisting}
+
+\end{reply}
+
+
+\begin{point}
+
+    165: the coordinate system is not described in the main text, just in the figure caption. Probably worth adding to section 2? Also helpful to reference the 26.4 kg/m3 isopycnal as magenta in the text here, especially if it is marked in magenta the rest of the paper.
+\end{point}
+
+\begin{reply}
+    Thanks, there is a new second paragraph in the intro explaining the co-ordinate system.
+\end{reply}
+
+
+\begin{point}
+    187: values can be easier to follow than color names (white is okay but defining what "pink" gets harder later on, after the descriptions of Figs 6-8)
+\end{point}
+
+\begin{reply}
+  Thanks, great suggestion.
+\end{reply}
+
+
+\begin{point}
+
+    Figure 5: a bit more info would help the reader find the features in the plot. In a talk, you might draw a circle around the offshore, eddy, and other water masses, but that's harder to do in a manuscript. Would having X mark the spot for a given feature, highlighting select profiles or using variance ellipses in T-S space of the features in question help?
+\end{point}
+
+\begin{reply}
+    The other reviewer had a similar suggestion - we have instead made a PDF of $gamma$ along 26.4, and identified the peaks.  Readers may be more comfortable with 1-D PDFs anyhow, so this seems a good way to get this across.
+\end{reply}
+
+\begin{point}
+    211: 2-d interpolation?
+\end{point}
+
+\begin{reply}
+    We hadn't defined the interpolation, so added a sentence:
+    \begin{lstlisting}
+        These lines are made with a two-dimensional interpolation where MVP
+        casts at a given depth have a Gaussian weight $w = \exp^{-(r/r_0)^2}$,
+        where $r$ is the distance from the line and $r_0 = 1.5\ \mathrm{km}$.
+    \end{lstlisting}
+\end{reply}
+
+\begin{point}
+    Figure 6: a is close to LC, right? And d to LB? Probably good to make this connection explicitly for comparison to the La Perouse cruise data. A subpanel of T/S for selected profiles or subsets of these data would be interesting for comparison to Figs. 4/5. Might be interesting to color-code by oxygen to really drive home the water mass relationships.
+\end{point}
+
+\begin{reply}
+    b is actually close to LC and d to LB.  Thanks, this is a useful distinction to make.  We have added these labels to Fig 6 and 7, and note this in the caption.
+
+    We could easily add another subpanel for with O2 color coded.  We hesitate to do so because there are already quite a few presentation methods, and we think the O2 relationship is pretty clear in the other presentation methods.
+\end{reply}
+
+\begin{point}
+    230: would be better to quantify correlation/significance
+\end{point}
+
+\begin{reply}
+    We didn't mean to imply linear correlation - a linear correlation could be fit, but its clearly not along a straight line.  This inspired adding Fig 8c. which is a nice way to show this.
+\end{reply}
+
+\begin{point}
+    234: 48.5N?
+\end{point}
+
+\begin{reply}
+    Thanks, fixed.
+\end{reply}
+
+\begin{point}
+    237: wording: regions are not abrupt
+\end{point}
+
+\begin{reply}
+    Thanks, changed to "transition".
+\end{reply}
+
+
+\begin{point}
+    248: citation?
+\end{point}
+
+\begin{reply}
+    Thanks, added Mackas et al 1987 and Weaver and Hsieh 1987.
+\end{reply}
+
+\begin{point}
+    Figure 9: Give the coordinate another name ($X_C$), since X/Y are used for the cross-shore coordinates.
+\end{point}
+
+\begin{reply}
+    Thanks, done.
+\end{reply}
+
+
+\begin{point}
+
+    283-286: this description is hard to follow. It looks to me like the surface $\gamma$ is greater than 0 everywhere, even at the surface, where the buoyant front should sit.
+\end{point}
+
+\begin{reply}
+    We should not have called the whole thing a ``front''.  The current itself has a slightly negative spice anomaly (cool and fresh), but the front has a positive spice anomaly.  This is changed to
+
+    \begin{lstlisting}
+        The survey started close to shore, and passed through the
+        Vancouver Island Coastal Current (along-track 0-10 km).
+        The coastal current forms a buoyant current, and is fresher
+        and colder than water at the same density.  The front with
+        the coastal water is relatively thick, greater than 20 km
+        wide, and has entrained partially mixed water down from the
+        surface to the foot of the front ($\gamma\approx0.1$).
+    \end{lstlisting}
+\end{reply}
+
+
+\begin{point}
+
+    291: tendrils of what?
+\end{point}
+
+\begin{reply}
+    Thanks "higher spice water" is now added.
+\end{reply}
+
+\begin{point}
+    303-304: Is the distribution indicative of substantial isopycnal and vertical mixing, or rather are the sharp cut-offs in $\theta-S$ properties what is indicative of mixing?
+\end{point}
+
+\begin{reply}
+    The sharp distinction of t-s properties are indicative of mixing. Changed to ``These distinct $\theta$--$S$ properties''.
+\end{reply}
+
+\begin{point}
+    313-315, 316-318: Neither of these features is apparent to the reader (at least this one!). I see pink at 25.5 and 26.6 kg/m3 but not 26.4 kg/m3.
+\end{point}
+
+\begin{reply}
+    That is unfortunate because it is one of the main points of the paper!    The new version of Fig 12 has all the data, which we probably should have used in the original submission because hopefully it makes the tongue more clear.  We also now refer to the panel explicitly.  We could annotate it, but have refrained for the present.
+\end{reply}
+
+\begin{point}
+    Figure 11: an arrow along direction of transport would be helpful in addition to the numbers in 11b.
+\end{point}
+
+\begin{reply}
+    Thanks, done. Also changed the km markings to the turn locations and added ticks on panel d corresponding to the tick locations.
+\end{reply}
+
+\begin{point}
+
+    Figure 12: Which data set is this? Worth including in caption and maybe text also.
+\end{point}
+
+\begin{reply}
+    Fixed - it was the MVP data, though the previous version was a subsample.
+\end{reply}
+
+\begin{point}
+    338: is advection demonstrated or suggested?
+\end{point}
+
+\begin{reply}
+    Thanks, "suggesting" is definitely better here.
+\end{reply}
+
+\begin{point}
+    351: infer significant mixing [has occurred].
+\end{point}
+
+\begin{reply}
+    Thanks.
+\end{reply}
+
+\begin{point}
+
+    393: Is this explicitly shown on a T/S diagram? Perhaps plucking out profiles through the eddy for comparison can make this point more cleanly. Is there preferential warming within the eddy relative to other water masses?
+\end{point}
+
+\begin{reply}
+    Yes, but perhaps better shown in Fig 3e, k, which are now explicitly referenced.
+\end{reply}
+
+\begin{point}
+    414: wording?
+\end{point}
+
+\begin{reply}
+    Fixed (hopefully) to
+    \begin{lstlisting}
+        In this calculation, the T-S relationship does not approach
+        a straight line until after approximately 60-100 days, or
+        until the mixing affects a vertical length scale of
+        $\lambda = \left(\tau \kappa\right)^{1/2} \gtrapprox 70\,
+        \mathrm{m}$.
+    \end{lstlisting}
+\end{reply}
+
+\begin{point}
+    468: How is this value chosen?
+\end{point}
+
+\begin{reply}
+    This was just a typical weak coastal current scaling.  We now cite Thomson and Kassovski and point out that this current could be substantially stronger.
+\end{reply}
+
+\end{document}
